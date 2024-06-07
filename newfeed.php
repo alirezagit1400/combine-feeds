@@ -32,10 +32,10 @@ foreach($xml as $key=>$feed) {
 $k=0;	
 foreach($feed->channel[0]->item as $post) {
 	
-	if($k<5) {
+if($k<5) {
   
    $url=urlencode($post->link);
- $link=str_replace('%2F','/',$url);
+  $link=str_replace('%2F','/',$url);
   $link=str_replace('%3A',':',$link);
   $link=str_replace('%3F','?',$link);
   $link=str_replace('%26','&',$link);
@@ -57,21 +57,14 @@ foreach($feed->channel[0]->item as $post) {
   if($key==0){
 	  
 	  $time=$time+16200;
-  }elseif($key==2) {
-	  
-	$time=$time-16200;  
-	  
-  }
-  $mrss[$t]['pubDate']=$time;
-  
-   $t=$t+1;
- 
- 
-	}
+           }elseif($key==2) {
+	       $time=$time-16200;  
+	               }
+      $mrss[$t]['pubDate']=$time;
+       $t=$t+1;
+ 	}
 	$k=$k+1;
-	
-	
-}
+	}
 
 }
 
@@ -83,12 +76,12 @@ usort($mrss,"sortbydate");
 
 foreach($mrss as $k=>$v) {
 	
-	 $item = $rss->channel->addChild('item');
-	  $item->addChild('title',htmlspecialchars($v['title']));
-       $item->addChild('description', $v['description']);
-        $item->addChild('link', 'https://telegram.me/berooz_tarin');
+	   $item = $rss->channel->addChild('item');
+	   $item->addChild('title',htmlspecialchars($v['title']));
+           $item->addChild('description', $v['description']);
+           $item->addChild('link', 'https://telegram.me/berooz_tarin');
            $item->addChild('guid', $v['guid']);
-            $item->addChild('pubDate',date(DATE_RSS,$v['pubDate'])) ;
+           $item->addChild('pubDate',date(DATE_RSS,$v['pubDate'])) ;
 	
 }
 
